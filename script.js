@@ -22,6 +22,8 @@ document.addEventListener("DOMContentLoaded", function () {
       const response = await fetch(
         `http://www.omdbapi.com/?apikey=2ecc7029&s=${movieName}`
       );
+      const data = await response.json();
+      console.log(data);
     } catch (error) {}
   }
 });
