@@ -3,4 +3,5 @@
 
 document.addEventListener("DOMContentLoaded", function () {
   const movieForm = document.getElementById("movieForm");
+  const movieResult = document.getElementById("movieResults");
 });
