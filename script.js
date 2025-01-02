@@ -24,6 +24,44 @@ document.addEventListener("DOMContentLoaded", function () {
       );
       const data = await response.json();
       console.log(data);
-    } catch (error) {}
+
+      if (data.Response === "False") {
+        throw new Error(data.Error || "No movies found");
+      }
+
+      displayMovies(data.Search);
+    } catch (error) {
+      movieResult.innerHTML = `<div class="error-message">"Error Searching movies. Please try again...."</div>`;
+    }
+  }
+
+  //Display all the movies
+  function displayMovies(movies) {
+    movieResults.innerHTML = `
+              <div class="movies-grid">
+                  ${movies
+                    .map(
+                      (movie) => `
+                      <div class="movie-card">
+                          <img 
+                              src="${
+                                movie.Poster !== "N/A"
+                                  ? movie.Poster
+                                  : "https://via.placeholder.com/300x450?text=No+Poster"
+                              }" 
+                              alt="${movie.Title}"
+                              class="movie-poster"
+                             
+                          >
+                          <div class="movie-info">
+                              <h3 class="movie-title">${movie.Title}</h3>
+                              <div class="movie-year">${movie.Year}</div>
+                          </div>
+                      </div>
+                  `
+                    )
+                    .join("")}
+              </div>
+          `;
   }
 });
